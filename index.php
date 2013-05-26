@@ -55,7 +55,7 @@
 switch (ENVIRONMENT)
 {
 	case 'development':
-		error_reporting(-1);
+		error_reporting(-1 ^ E_NOTICE);
 		ini_set('display_errors', 1);
 	break;
 
@@ -220,7 +220,8 @@ switch (ENVIRONMENT)
 			$application_folder = $_temp;
 		}
 
-		define('APPPATH', $application_folder.'/');
+		//define('APPPATH', $application_folder.'/');
+		define('APPPATH', realpath($application_folder) . '/'); 
 	}
 	else
 	{
@@ -231,15 +232,16 @@ switch (ENVIRONMENT)
 			exit(3); // EXIT_* constants not yet defined; 3 is EXIT_CONFIG.
 		}
 
-		define('APPPATH', BASEPATH.$application_folder.'/');
+		define('APPPATH', realpath($application_folder) . '/'); 
+		//define('APPPATH', BASEPATH.$application_folder.'/');
 	}
-
 	// The path to the "views" folder
 	if ( ! is_dir($view_folder))
 	{
 		if ( ! empty($view_folder) && is_dir(APPPATH.$view_folder.'/'))
 		{
 			$view_folder = APPPATH.$view_folder;
+			
 		}
 		elseif ( ! is_dir(APPPATH.'views/'))
 		{
