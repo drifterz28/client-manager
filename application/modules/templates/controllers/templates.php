@@ -22,7 +22,7 @@ class Templates extends MX_Controller {
 	public function main($data = null){
 		$this->load->view('head',$data);
 		$this->load->view('header',$data);
-		$this->load->view('main',$data);
+		$this->load->view('master',$data);
 		$this->load->view('footer',$data);
 		//$this->output->cache(300);
 	}
